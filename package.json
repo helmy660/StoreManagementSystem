@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/helmy660/StoreManagementSystem/issues"
   },
-  "homepage": "https://github.com/helmy660/StoreManagementSystem#readme"
+  "homepage": "https://github.com/helmy660/StoreManagementSystem#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
