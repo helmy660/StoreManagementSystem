@@ -1,0 +1,19 @@
+{
+  "name": "storemanagementsystem",
+  "version": "1.0.0",
+  "description": "Building a mall store management system that will control all the store elements",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helmy660/StoreManagementSystem.git"
+  },
+  "author": "Mohamed Helmy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/helmy660/StoreManagementSystem/issues"
+  },
+  "homepage": "https://github.com/helmy660/StoreManagementSystem#readme"
+}
