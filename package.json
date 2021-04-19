@@ -26,6 +26,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-flash": "^0.0.2",
+    "express-validator": "^6.10.0",
     "helmet": "^4.5.0",
     "jsonwebtoken": "^8.5.1",
     "lusca": "^1.7.0",
