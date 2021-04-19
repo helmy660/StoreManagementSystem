@@ -13,6 +13,7 @@ const app = express();
 
 // Import Routes
 import apiRoute from "./routes/api.route";
+import productRoute from "./routes/product.route";
 
 // Express configuration
 app.set("port", PORT || 3003);
@@ -42,6 +43,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use("/api", apiRoute);
+app.use("/api/product", productRoute);
 
 app.use(function (err: Error, req: Request, res: Response, next: any) {
   console.error(err);
