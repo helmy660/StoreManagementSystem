@@ -9,13 +9,10 @@ const connectionParams = {
   useUnifiedTopology: true,
 };
 
-export const dbConnection = async () => {
-  await mongoose
-    .connect(url, connectionParams)
-    .then(() => {
-      console.log("Connected to database ");
-    })
-    .catch((err: any) => {
-      console.error(`Error connecting to the database. \n${err}`);
-    });
-};
+mongoose.connect(url, connectionParams);
+
+//Get the default connection
+export const db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
