@@ -7,9 +7,11 @@ import morgan from "morgan";
 import helmet from "helmet";
 import noCache from "nocache";
 import { CORS_WHITELIST, PORT } from "./util/secrets";
+import { connectDatabase } from "./services";
 
 // Create Express server
 const app = express();
+connectDatabase();
 
 // Import Routes
 import apiRoute from "./routes/api.route";
