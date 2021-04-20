@@ -14,7 +14,6 @@ const app = express();
 connectDatabase();
 
 // Import Routes
-import apiRoute from "./routes/api.route";
 import productRoute from "./routes/product.route";
 
 // Express configuration
@@ -44,7 +43,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-app.use("/api", apiRoute);
 app.use("/api/product", productRoute);
 
 app.use(function (err: Error, req: Request, res: Response, next: any) {
