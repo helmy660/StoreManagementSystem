@@ -19,7 +19,15 @@ export class CustomError extends Error {
 
 export const ErrorTypes = {
   INVALID_REQUEST_BODY: {
-    code: 4007,
+    code: 4001,
     message: "Error: Invalid data in request body",
+  },
+  INVALID_CREDENTIALS: {
+    code: 4002,
+    message: "Error: Invalid userName or password",
+  },
+  INVALID_USERNAME: {
+    code: 4002,
+    message: "Error: Invalid userName",
   },
 };
