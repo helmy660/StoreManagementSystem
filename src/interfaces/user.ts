@@ -7,4 +7,6 @@ export interface IUser extends Document {
   role: UserRoles;
   firstName: string;
   lastName: string;
+  generateHash?(password: string): Promise<string>;
+  validPassword?(givenPassword: string, userPassword: string): Promise<boolean>;
 }
