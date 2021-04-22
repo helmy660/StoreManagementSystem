@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { UserModel } from "../../models";
 import { User } from "../../database";
 import { CustomError, ErrorTypes } from "../../services";
-import { JWT_SECRET } from "../../util/secrets";
+import { JWT_SECRET, JWT_EXPIRY } from "../../util/secrets";
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -15,7 +15,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     if (existingUser) {
       return res
         .status(200)
-        .json({ success: true, token: jwt.sign({ userId: userData._id }, JWT_SECRET, { expiresIn: "5m" }) });
+        .json({ success: true, token: jwt.sign({ userId: userData._id }, JWT_SECRET, { expiresIn: JWT_EXPIRY }) });
     } else {
       throw new CustomError(ErrorTypes.INVALID_CREDENTIALS);
     }
