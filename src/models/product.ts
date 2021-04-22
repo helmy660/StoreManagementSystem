@@ -7,7 +7,7 @@ const ProductSchema: Schema = new Schema({
   rate: { type: Number, required: true },
   price: { type: Number, required: true },
   quantity: { type: Number, required: true },
-  offers: { type: String, required: true },
+  offers: { type: String, default: null },
   soldNumbers: { type: Number, default: 0 },
 });
 
