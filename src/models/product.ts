@@ -9,6 +9,9 @@ const ProductSchema: Schema = new Schema({
   quantity: { type: Number, required: true },
   offers: { type: String, default: null },
   soldNumbers: { type: Number, default: 0 },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  categories: [{ type: String, required: true }],
 });
 
 export const ProductModel = mongoose.model<IProduct>("Product", ProductSchema);

@@ -15,6 +15,9 @@ export class Product {
         quantity: data.quantity,
         offers: data.offers,
         soldNumbers: data.soldNumbers,
+        title: data.title,
+        description: data.description,
+        categories: data.categories,
       });
     } catch (error) {
       console.log(error);
