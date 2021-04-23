@@ -38,4 +38,8 @@ export const ErrorTypes = {
     code: 4005,
     message: "Error: This User is not authorized to perform this action",
   },
+  INVALID_ACTION: {
+    code: 4006,
+    message: "Error: Failed to perform this action",
+  },
 };
