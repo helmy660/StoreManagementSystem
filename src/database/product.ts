@@ -8,20 +8,55 @@ export class Product {
     try {
       return await ProductModel.create({
         _id: new mongoose.Types.ObjectId(),
-        name: data.name,
+        title: data.title,
+        description: data.description,
         picture: data.picture,
         rate: data.rate,
         price: data.price,
         quantity: data.quantity,
-        offers: data.offers,
+        offer: data.offer,
         soldNumbers: data.soldNumbers,
-        title: data.title,
-        description: data.description,
         categories: data.categories,
       });
     } catch (error) {
       console.log(error);
       throw new CustomError(ErrorTypes.INVALID_REQUEST_BODY);
+    }
+  }
+
+  async update(productId: string, data: any) {
+    try {
+      return await ProductModel.findByIdAndUpdate(productId, data);
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(ErrorTypes.INVALID_ACTION);
+    }
+  }
+
+  async getById(productId: string) {
+    try {
+      return await ProductModel.findById(productId);
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(ErrorTypes.INVALID_ACTION);
+    }
+  }
+
+  async getByCategoryId(categoryId: string) {
+    try {
+      return await ProductModel.find({ categories: categoryId });
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(ErrorTypes.INVALID_ACTION);
+    }
+  }
+
+  async getAll() {
+    try {
+      return await ProductModel.find();
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(ErrorTypes.INVALID_ACTION);
     }
   }
 }
