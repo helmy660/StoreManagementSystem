@@ -16,6 +16,7 @@ connectDatabase();
 // Import Routes
 import productRoute from "./routes/product.route";
 import userRoute from "./routes/user.route";
+import categoryRoute from "./routes/category.route";
 
 // Express configuration
 app.set("port", PORT || 3003);
@@ -46,6 +47,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use("/products", productRoute);
 app.use("/users", userRoute);
+app.use("/categories", categoryRoute);
 
 app.use(function (err: Error, req: Request, res: Response, next: any) {
   console.error(err);
