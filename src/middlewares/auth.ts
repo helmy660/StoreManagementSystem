@@ -15,7 +15,7 @@ export function auth(req: Request & { payload: any }, res: Response, next: NextF
     console.error(err);
     res.status(401).json({
       success: false,
-      message: "Access denied. User not Authenticated",
+      message: "Access denied. Invalid token",
     });
   }
 }

@@ -5,14 +5,14 @@ import { UserRoles } from "../enum";
 
 export async function isAdminUser(req: Request & { payload: any }, res: Response, next: NextFunction) {
   try {
-    const { id } = req.payload;
-    if (!id) {
+    const { userId } = req.payload;
+    if (!userId) {
       throw new CustomError(ErrorTypes.INVALID_USER_ID);
     }
     const user = new User();
-    const userData = await user.getById(id);
+    const userData = await user.getById(userId);
     if (userData.role !== UserRoles.ADMIN) {
-      throw new CustomError(ErrorTypes.INVALID_USER_ID);
+      throw new CustomError(ErrorTypes.USER_NOT_AUTHORIZED);
     }
     next();
   } catch (err) {
