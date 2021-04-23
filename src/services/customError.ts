@@ -27,7 +27,15 @@ export const ErrorTypes = {
     message: "Error: Invalid userName or password",
   },
   INVALID_USERNAME: {
-    code: 4002,
+    code: 4003,
     message: "Error: Invalid userName",
+  },
+  INVALID_USER_ID: {
+    code: 4004,
+    message: "Error: Invalid user id",
+  },
+  USER_NOT_AUTHORIZED: {
+    code: 4005,
+    message: "Error: This User is not authorized to perform this action",
   },
 };
