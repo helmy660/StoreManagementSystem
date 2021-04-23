@@ -33,4 +33,16 @@ export class User {
       throw new CustomError(ErrorTypes.INVALID_CREDENTIALS);
     }
   }
+
+  async getById(id: string) {
+    try {
+      console.log(`Getting a user account with id: ${id}`);
+      const user = await UserModel.findOne({ _id: id }).exec();
+      if (user) return user;
+      else throw new Error();
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(ErrorTypes.INVALID_USER_ID);
+    }
+  }
 }
