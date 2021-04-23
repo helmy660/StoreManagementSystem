@@ -1,6 +1,6 @@
 import { Response, NextFunction } from "express";
 
-export async function logger(req: any, res: Response, next: NextFunction) {
+export function logger(req: any, res: Response, next: NextFunction) {
   console.log({
     body: JSON.stringify(req.body),
     params: JSON.stringify(req.params),
