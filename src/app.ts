@@ -6,7 +6,7 @@ import flash from "express-flash";
 import morgan from "morgan";
 import helmet from "helmet";
 import noCache from "nocache";
-import { CORS_WHITELIST, PORT } from "./util/secrets";
+import { PORT } from "./util/secrets";
 import { connectDatabase } from "./services";
 
 // Create Express server
@@ -17,6 +17,7 @@ connectDatabase();
 import productRoute from "./routes/product.route";
 import userRoute from "./routes/user.route";
 import categoryRoute from "./routes/category.route";
+import cartRoute from "./routes/cart.route";
 
 // Express configuration
 app.set("port", PORT || 3003);
@@ -32,24 +33,18 @@ app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-  const origin = req.headers.origin as string;
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
-
-  if (!Object.values(CORS_WHITELIST).includes(origin)) {
-    console.log(`CORS rejected request from ${origin}`);
-    return res.status(403).json({ success: false, message: "CORS Error not Authorized" });
-  }
-  res.setHeader("Access-Control-Allow-Origin", origin);
   next();
 });
 
 app.use("/products", productRoute);
 app.use("/users", userRoute);
 app.use("/categories", categoryRoute);
+app.use("/carts", cartRoute);
 
-app.use(function (err: Error, req: Request, res: Response, next: any) {
+app.use((err: Error, req: Request, res: Response, next: any) => {
   console.error(err);
   const errorResponse = {
     success: false,
