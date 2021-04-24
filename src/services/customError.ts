@@ -42,4 +42,36 @@ export const ErrorTypes = {
     code: 4006,
     message: "Error: Failed to perform this action",
   },
+  CUSTOMER_ALREADY_HAS_CART: {
+    code: 4007,
+    message: "Error: This User already has an existing cart",
+  },
+  CART_NOT_EXISTING: {
+    code: 4008,
+    message: "Error: No carts are found",
+  },
+  INVALID_CART_SUSBEND: {
+    code: 4009,
+    message: "Error: Failed to susbend this cart",
+  },
+  INVALID_CART: {
+    code: 4010,
+    message: "Error: Invalid cart",
+  },
+  CART_SUSBENDED: {
+    code: 4011,
+    message: "Error: This cart is susbended",
+  },
+  INVALID_QUANTITY: {
+    code: 4012,
+    message: "Error: No sufficient quantity for this product",
+  },
+  INVALID_PRODUCT: {
+    code: 4013,
+    message: "Error: Invalid product",
+  },
+  Empty_CART: {
+    code: 4014,
+    message: "Error: Cart is already empty",
+  },
 };
