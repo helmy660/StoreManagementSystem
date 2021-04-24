@@ -18,6 +18,7 @@ import productRoute from "./routes/product.route";
 import userRoute from "./routes/user.route";
 import categoryRoute from "./routes/category.route";
 import cartRoute from "./routes/cart.route";
+import orderRoute from "./routes/order.route";
 
 // Express configuration
 app.set("port", PORT || 3003);
@@ -43,6 +44,7 @@ app.use("/products", productRoute);
 app.use("/users", userRoute);
 app.use("/categories", categoryRoute);
 app.use("/carts", cartRoute);
+app.use("/orders", orderRoute);
 
 app.use((err: Error, req: Request, res: Response, next: any) => {
   console.error(err);
