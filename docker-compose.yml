@@ -16,7 +16,7 @@ services:
       - DB_PASSWORD=$DB_PASSWORD
       - DB_NAME=$DB_NAME
     ports:
-      - "80:3003"
+      - "$PORT:3003"
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
