@@ -6,7 +6,7 @@ const OrderSchema: Schema = new Schema(
   {
     _id: Schema.Types.ObjectId,
     customerId: { type: String, required: true },
-    sellerId: { type: String, required: true },
+    sellerId: { type: String, default: null },
     status: { type: String, default: OrderStatus.CREATED },
     totalItems: { type: Number, required: true },
     totalPrice: { type: Number, required: true },
