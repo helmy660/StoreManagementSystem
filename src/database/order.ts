@@ -2,10 +2,9 @@ import mongoose from "mongoose";
 import { OrderModel } from "../models";
 import { CustomError, ErrorTypes } from "../services";
 import { OrderStatus } from "../enum";
-import { IOrder } from "../interfaces";
 
 export class Order {
-  async create(customerId: string, data: IOrder) {
+  async create(customerId: string, data: any) {
     try {
       return await OrderModel.create({
         _id: new mongoose.Types.ObjectId(),
@@ -19,10 +18,19 @@ export class Order {
     }
   }
 
-  async removeProduct(cartId: string, products: Array<any>, totalItems: number, totalPrice: number) {
+  async removeOrder(orderId: string) {
+    try {
+      return await OrderModel.findByIdAndDelete(orderId);
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(ErrorTypes.INVALID_ACTION);
+    }
+  }
+
+  async removeProduct(orderId: string, products: Array<any>, totalItems: number, totalPrice: number) {
     try {
       return await OrderModel.updateOne(
-        { _id: cartId },
+        { _id: orderId },
         {
           $inc: { totalItems: -totalItems, totalPrice: -totalPrice },
           products,
@@ -34,10 +42,10 @@ export class Order {
     }
   }
 
-  async removeAllProducts(cartId: string) {
+  async removeAllProducts(orderId: string) {
     try {
       return await OrderModel.updateOne(
-        { _id: cartId },
+        { _id: orderId },
         {
           totalItems: 0,
           totalPrice: 0,
@@ -50,9 +58,9 @@ export class Order {
     }
   }
 
-  async getById(cartId: string) {
+  async getById(orderId: string) {
     try {
-      return await OrderModel.findById(cartId);
+      return await OrderModel.findById(orderId);
     } catch (error) {
       console.log(error);
       throw new CustomError(ErrorTypes.INVALID_ACTION);
@@ -68,6 +76,42 @@ export class Order {
     }
   }
 
+  async getCustomerOrders(customerId: string) {
+    try {
+      return await OrderModel.find().where("customerId").equals(customerId);
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(ErrorTypes.INVALID_ACTION);
+    }
+  }
+
+  async getSellerOrders(sellerId: string) {
+    try {
+      return await OrderModel.find().where("sellerId").equals(sellerId);
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(ErrorTypes.INVALID_ACTION);
+    }
+  }
+
+  async getAssigned() {
+    try {
+      return await OrderModel.find().where("status").equals(OrderStatus.ASSIGNED_TO_SELLER);
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(ErrorTypes.INVALID_ACTION);
+    }
+  }
+
+  async getUnAssigned() {
+    try {
+      return await OrderModel.find().where("sellerId").equals(null);
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(ErrorTypes.INVALID_ACTION);
+    }
+  }
+
   async getByCustomerId(customerId: string) {
     try {
       return await OrderModel.findOne({ customerId });
@@ -77,27 +121,27 @@ export class Order {
     }
   }
 
-  async refuseBySeller(cartId: string) {
+  async refuseBySeller(orderId: string) {
     try {
-      return await OrderModel.findByIdAndUpdate(cartId, { status: OrderStatus.REFUSED_BY_SELLER });
+      return await OrderModel.findByIdAndUpdate(orderId, { sellerId: null, status: OrderStatus.REFUSED_BY_SELLER });
     } catch (error) {
       console.log(error);
       throw new CustomError(ErrorTypes.INVALID_ACTION);
     }
   }
 
-  async assignToSeller(cartId: string, sellerId: string) {
+  async assignToSeller(orderId: string, sellerId: string) {
     try {
-      return await OrderModel.findByIdAndUpdate(cartId, { sellerId, status: OrderStatus.ASSIGNED_TO_SELLER });
+      return await OrderModel.findByIdAndUpdate(orderId, { sellerId, status: OrderStatus.ASSIGNED_TO_SELLER });
     } catch (error) {
       console.log(error);
       throw new CustomError(ErrorTypes.INVALID_ACTION);
     }
   }
 
-  async deliverOrder(cartId: string) {
+  async deliverOrder(orderId: string) {
     try {
-      return await OrderModel.findByIdAndUpdate(cartId, { status: OrderStatus.READY_FOR_DELIVERY });
+      return await OrderModel.findByIdAndUpdate(orderId, { status: OrderStatus.READY_FOR_DELIVERY });
     } catch (error) {
       console.log(error);
       throw new CustomError(ErrorTypes.INVALID_ACTION);
