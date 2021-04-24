@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: store-managment-system
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - JWT_EXPIRY=$JWT_EXPIRY
+      - DB_USER=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_NAME=$DB_NAME
+    ports:
+      - "80:3003"
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  node_modules:
