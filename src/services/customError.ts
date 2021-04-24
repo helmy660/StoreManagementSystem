@@ -74,4 +74,16 @@ export const ErrorTypes = {
     code: 4014,
     message: "Error: Cart is already empty",
   },
+  INVALID_ORDER: {
+    code: 4015,
+    message: "Error: Invalid order",
+  },
+  ORDER_UNDER_PROCESSING: {
+    code: 4016,
+    message: "Error: order is under processing now",
+  },
+  INVALID_SELLER: {
+    code: 4017,
+    message: "Error: Invalid seller",
+  },
 };
