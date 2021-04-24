@@ -1,5 +1,5 @@
 import { Document } from "mongoose";
-import { OrderStatus } from "../enum";
+import { OrderStatus, Currency } from "../enum";
 
 export interface IOrder extends Document {
   customerId: string;
@@ -7,5 +7,6 @@ export interface IOrder extends Document {
   status?: OrderStatus;
   totalItems?: number;
   totalPrice?: number;
+  currency: Currency;
   products?: Array<any>;
 }
