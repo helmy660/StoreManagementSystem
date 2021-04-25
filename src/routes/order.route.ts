@@ -59,4 +59,14 @@ router.post(
   orderController.reject,
 );
 
+router.post(
+  "/confirm/:orderId",
+  logger,
+  auth,
+  isSellerUser,
+  [param("orderId").exists({ checkNull: true }).isMongoId()],
+  validator,
+  orderController.confirmOrder,
+);
+
 export default router;
