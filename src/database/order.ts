@@ -147,4 +147,13 @@ export class Order {
       throw new CustomError(ErrorTypes.INVALID_ACTION);
     }
   }
+
+  async outOfStock(orderId: string) {
+    try {
+      return await OrderModel.findByIdAndUpdate(orderId, { status: OrderStatus.OUT_OF_STOCK });
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(ErrorTypes.INVALID_ACTION);
+    }
+  }
 }
