@@ -27,13 +27,10 @@ export const confirmOrder = async (req: Request & { payload: any }, res: Respons
       if (item.quantity > productData.quantity) {
         const diff = item.quantity - productData.quantity;
         item.quantity = productData.quantity;
-        await product.update(item.productId, { quantity: 0, soldNumbers: productData.quantity });
+        await product.updateQuantity(item.productId, 0, productData.quantity);
         await order.removeProduct(orderId, orderDetails.products, diff, diff * productData.price);
       } else {
-        await product.update(item.productId, {
-          quantity: productData.quantity - item.quantity,
-          soldNumbers: item.quantity,
-        });
+        await product.updateQuantity(item.productId, productData.quantity - item.quantity, item.quantity);
       }
     }
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { body, param, query } from "express-validator";
+import { body, param } from "express-validator";
 import * as productController from "../controllers/product";
 import { logger, validator, auth, isSellerUser } from "../middlewares";
 
@@ -23,7 +23,7 @@ router.post(
     body("quantity").exists({ checkNull: true }).isInt({ gt: 0 }),
     body("categories").exists({ checkNull: true }).isArray({ min: 1 }).isMongoId(),
     body("soldNumbers").optional({ nullable: false }).isInt({ gt: 0 }),
-    body("offer").optional({ nullable: false }).isFloat({ gt: 0 }),
+    body("offer").optional({ nullable: false }).isFloat({ gt: 0, lt: 100 }),
   ],
   validator,
   productController.create,
@@ -47,7 +47,7 @@ router.put(
     body("quantity").optional({ nullable: false }).isInt({ gt: 0 }),
     body("categories").optional({ nullable: false }).isArray({ min: 1 }).isMongoId(),
     body("soldNumbers").optional({ nullable: false }).isInt({ gt: 0 }),
-    body("offer").optional({ nullable: false }).isFloat({ gt: 0 }),
+    body("offer").optional({ nullable: false }).isFloat({ gt: 0, lt: 100 }),
   ],
   validator,
   productController.update,

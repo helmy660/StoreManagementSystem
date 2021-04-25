@@ -13,9 +13,9 @@ export class Product {
         picture: data.picture,
         rate: data.rate,
         price: data.price,
-        quantity: data.quantity,
+        quantity: Number(data.quantity),
         offer: data.offer,
-        soldNumbers: data.soldNumbers,
+        soldNumbers: Number(data.soldNumbers),
         categories: data.categories,
         currency: data.currency,
       });
@@ -28,6 +28,21 @@ export class Product {
   async update(productId: string, data: any) {
     try {
       return await ProductModel.findByIdAndUpdate(productId, data);
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(ErrorTypes.INVALID_ACTION);
+    }
+  }
+
+  async updateQuantity(productId: string, quantity: number, soldNumbers: number) {
+    try {
+      return await ProductModel.updateOne(
+        { _id: productId },
+        {
+          $inc: { soldNumbers },
+          quantity,
+        },
+      );
     } catch (error) {
       console.log(error);
       throw new CustomError(ErrorTypes.INVALID_ACTION);
