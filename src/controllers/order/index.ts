@@ -8,3 +8,4 @@ export { assignSeller } from "./assignSeller";
 export { getCustomerOrders } from "./getCustomerOrders";
 export { getSellerOrders } from "./getSellerOrders";
 export { reject } from "./reject";
+export { confirmOrder } from "./confirmOrder";
