@@ -86,4 +86,8 @@ export const ErrorTypes = {
     code: 4017,
     message: "Error: Invalid seller",
   },
+  OUT_OF_STOCK: {
+    code: 4018,
+    message: "Error: The order items are out of stock.",
+  },
 };
