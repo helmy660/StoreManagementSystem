@@ -1,4 +1,5 @@
 import { Document } from "mongoose";
+import { Currency } from "../enum";
 
 export interface IProduct extends Document {
   picture: string;
@@ -10,4 +11,5 @@ export interface IProduct extends Document {
   title: string;
   description: string;
   categories: Array<string>;
+  currency: Currency;
 }

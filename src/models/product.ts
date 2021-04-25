@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { Currency } from "../enum";
 import { IProduct } from "../interfaces";
 
 const ProductSchema: Schema = new Schema({
@@ -12,6 +13,7 @@ const ProductSchema: Schema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   categories: [{ type: Schema.Types.ObjectId, required: true }],
+  currency: { type: String, default: Currency.EGP },
 });
 
 export const ProductModel = mongoose.model<IProduct>("Product", ProductSchema);
